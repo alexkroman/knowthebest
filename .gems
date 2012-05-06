@@ -1,0 +1,9 @@
+amazon-ecs
+google-search
+exceptional
+rack-cache
+sequel --version=3.9.0
+sinatra-sequel
+newrelic_rpm --version=2.10.6
+sinatra --version=1.0
+padrino-helpers

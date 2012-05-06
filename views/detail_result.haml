@@ -1,0 +1,8 @@
+%span.number= (@index + 1).to_s + '.' 
+%a{:href => @vote[:pick].referral_url, :target => "new"}= @vote[:pick][:title]
+- @votes.select{|x| x[:pick_id] == @vote[:pick][:id]}.each do |vote|
+  .mypicks
+    %a{:href => "/for/#{vote.user[:nickname]}"}= vote.user[:nickname]
+    %span.time= time_ago_in_words(vote.created_at) + ' ago'        
+    %br/
+    #{h(vote[:comment])}

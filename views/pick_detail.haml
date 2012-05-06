@@ -1,0 +1,9 @@
+%img{:src => '/images/heart.png', :width => 16, :height => 16, :alt => 'Best'}
+%a{:href => "/for/#{@vote[:user][:nickname]}"}= @vote[:user][:nickname]
+picked 
+%a{:href => @vote[:pick].referral_url, :target => 'new'}= @vote[:pick][:title]
+as 
+%a{:href => "/#{@vote[:topic][:slug]} "}= @vote[:topic].display_name
+%span.time= time_ago_in_words(@vote[:votes][:created_at]) + ' ago'
+- unless @vote[:votes][:comment].blank?
+  .allpicks.maincomment= @vote[:votes][:comment] 

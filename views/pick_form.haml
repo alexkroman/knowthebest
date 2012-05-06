@@ -1,0 +1,16 @@
+%div{:id => "choose-#{@index}", :class => 'choose'}
+  %form{:action => "/pick", :method => :post}
+    <input type="hidden" name="topic_id" value="#{@vote[:votes][:topic_id]}" />
+    <input type="hidden" name="item[image]" value="#{@vote[:pick][:image]}" />
+    <input type="hidden" name="item[url]" value="#{@vote[:pick][:url]}" />
+    .choosetitle
+      <b>Is this name right?</b>
+      %br/
+      %input{:size => 35, :class => 'loginrequired', :type => 'text', :size => 30, :name => 'item[title]', :value => @vote[:pick][:title]}
+      %br/
+    <b>Why is this the best?</b>
+    %br/
+    %textarea{:class => 'loginrequired commentform', :id => "comment-#{@index}", :name => 'comment', :rows => 30, :cols => 30}
+    %br/
+    %input{:type => 'submit', :class => 'loginrequired', :value => 'Save pick'}
+    %a{:href => "#", :style=> "font-size: .6em;font-weight:normal;margin-left:15px;", :onclick => "$('#detail-#{@index}').toggle('slide');$('#choose-#{@index}').toggle();return false;"} Cancel

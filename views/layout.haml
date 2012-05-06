@@ -1,0 +1,77 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
+  %head
+    %title 
+      =@page_title
+    = stylesheet_link_tag 'screen.css'
+    <!--[if lt IE 8]><link rel="stylesheet" href="/stylesheets/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    %link{:rel => "stylesheet", :href => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/themes/base/jquery-ui.css", :type => "text/css", :media => "all"}    
+    %link{:rel => "stylesheet", :href => '/style.css'}
+    = meta_tag "text/html; charset=UTF-8", 'http-equiv' => "Content-Type"
+    = meta_tag "lOTzSIZn7cO5Jc9rzcmMF-XB7lhhttXk-FaA7PFMfFs", :name => 'google-site-verification'
+    = meta_tag @meta_description, :name => 'description'
+    = meta_tag "reviews, rankings, electronics, books, places" , :name => 'keywords'
+    = meta_tag "D99DDF15F61B2E7B6E84F60620A22DEA", :name => 'msvalidate.01'
+  %body
+    %div.container
+      %div.container
+        .span-6
+          #logo
+            %a{:href => '/'} 
+              %img{:src => '/images/logo.png', :width => 171, :height => 35, :alt => 'Allthebests'}
+        .caption
+          - if @user
+            You are logged in as 
+            %a{:href => "/for/#{@user.nickname}"} <b>#{@user.nickname}</b> &middot; <a href="/logout">Logout</a>
+          - else 
+            <a class="rpxnow" onclick="return false;" href="https://allthebests.rpxnow.com/openid/v2/signin?token_url=#{@token_url}">Sign In</a> &middot; <a class="rpxnow" onclick="return false;" href="https://allthebests.rpxnow.com/openid/v2/signin?token_url=#{@token_url}">Join allthebests</a>
+      %form{:method => 'get', :action => '/find', :class => 'hint'}
+        %div.header.span-24
+          %input{:autocomplete => 'off', :id => 'maininput', :class => 'for', :style => 'font-size:32px;color:#777;', :size => 33, :type => 'text', :title => "I'd like to find the best...", :name => 'q'}
+          %input{:id => 'search', :type => 'submit', :value => 'search'}
+      .span-16.append-2
+        = yield
+      .span-6.last
+        .separator Featured lists
+        .grey
+          - @popular_bests.each do |best|
+            %p 
+              = image_tag best[:picks][:image], :width => 25, :height => 25, :alt => best[:topics].display_name, :style => 'vertical-align:middle;padding-right:2px;'
+              %a{:href => "/#{best[:topics][:slug]}"} #{best[:topics].display_name}
+          <a href="/new" style="font-size:1.2em;font-weight:bold;">Start a new list &raquo;</a>
+        .separator Weekly leaders
+        .grey
+          - @leaders.each do |leader|
+            %p 
+              %a{:href => "/for/#{leader[:user].nickname}"}= leader[:user].nickname 
+              &middot; 
+              %b= leader[:points] 
+              points
+    .footer.container
+      .span-17
+        <a href="/about">About</a> &middot;
+        <a href="http://allthebests.tumblr.com" target="new">Blog</a> &middot;
+        <a target="new" href="http://alexkroman.wufoo.com/forms/feedback-and-suggestions-for-allthebests/">Take our Survey</a>
+      .twitter
+        <b><a href="http://twitter.com/allthebests" target="new">Follow @allthebests on Twitter</a></b>
+    %script{:type => 'text/javascript', :src => 'http://www.google.com/jsapi?key=ABQIAAAA96u81Wg_4txRgAnmafsUChTNlEFj75kiaU_omLx7Dy1E4peibhRjaS3CHWucAHqGGpWE66OlOYPXQg'}    
+    %script= 'google.load("jquery", "1.4.2");google.load("jqueryui", "1.8");'
+    <script>
+    var rpxJsHost = (("https:" == document.location.protocol) ? "https://" : "http://static.");
+    document.write(unescape("%3Cscript src='" + rpxJsHost + "rpxnow.com/js/lib/rpx.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    = javascript_include_tag 'jquery.inputHintOverlay.js', 'application.js'
+    - unless @user
+      <script>
+      $('.loginrequired').attr("disabled", true); 
+      $('.commentform').val("You'll need to sign in or join before you can pick your best.");
+      </script>
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+    var pageTracker = _gat._getTracker("UA-173596-11");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>

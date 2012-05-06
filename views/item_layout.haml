@@ -1,0 +1,8 @@
+.container.mainpick.span-17.append-1
+  .span-2
+    %img{:src => @vote[:pick][:image], :height => 65, :width => 65, :alt => 'Image'}
+  .mainpicktitle
+    %div{:id => "detail-#{@index}"}
+      = @detail 
+      .actions= @actions
+    = haml(:pick_form, :layout => false)

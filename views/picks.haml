@@ -1,0 +1,6 @@
+- if @results
+  .pagedetail
+    - @results.each_with_index do |@vote, @index|
+      - @detail = haml(:pick_detail, :layout => false)
+      - @actions = haml(:pick_and_pick_something_better, :layout => false)
+      = haml(:item_layout, :layout => false)

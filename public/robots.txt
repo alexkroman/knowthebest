@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /r/
+Disallow: /look/

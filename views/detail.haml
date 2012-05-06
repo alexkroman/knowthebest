@@ -1,0 +1,7 @@
+.detailheader #{@topic.display_name}
+.pagedetail
+  - @picks_in_order.each_with_index do |@vote, @index|
+    - @detail = haml(:detail_result, :layout => false)
+    - @actions = haml(:pick_action, :layout => false)
+    = haml(:item_layout, :layout => false)    
+  Don't see what you want?  <a href="/look/#{@topic.id}" style="font-weight:bold;">Pick something better</a>.
